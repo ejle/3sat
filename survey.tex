@@ -32,6 +32,7 @@
 
 \everymath{\displaystyle} % displays inlinlatexe math as displaymath
 
+
 \title{3SAT Survey}
 \author{Edward Lee}
 
@@ -120,10 +121,46 @@
 
 \section{Sch\"{o}ning's Algorithm}
 
+The paper \cite{SchoningA99} presents a simple randomized algorithm for solving $k$-SAT
+
+\begin{itemize}
+	\item Guess an initial assignment $a \in \{0,1\}^n$ uniformly at random
+	\item Repeat $3n$ times: 
+	\begin{itemize}
+		\item If the formula is satisfied by $a$ - stop and accept $a$.
+		\item Let $C$ be some clause not being satisfied by $a$: Pick one of the $\leq k$ literals in the clause at random and flip its value in the current assignment.
+	\end{itemize}
+\end{itemize}
+
+We now wish to estimate the running time of this randomized algorithm, and upper bound it as $p$. The rationale behind this is that 
+
+
 
 \section{PPSZ Algorithm}
 
 
-
+\bibliographystyle{plain}
+\bibliography{3sat}
 
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
