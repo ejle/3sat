@@ -132,7 +132,33 @@ The paper \cite{SchoningA99} presents a simple randomized algorithm for solving 
 	\end{itemize}
 \end{itemize}
 
-We now wish to estimate the running time of this randomized algorithm, and upper bound it as $p$. The rationale behind this is that 
+We now wish to estimate the running time of this randomized algorithm, and upper bound it as $p$. The rationale behind this is that the expected number of repetitions before a satisfying assignment is $\frac{1}{p}$, and the probability that after $t$ repeitions, the probability of not getting a satisfying assignment is at most $(1-p)^t \leq e^{pt}$.
+
+We provide analysis for 3 sat for now. General arguments can be found in the paper but this is a nicer simplification for presentation and understanding for now. First, there are $2^n \binom{n}{u}$ possible assignments of $a$ which differ from $a^*$ in exactly $u$ variables.
+
+Next we consider the question of finding a solution from assignment $a$ in exactly $3u$ steps. 
+% Let $a$ be the current assignment and $a^*$ be the satisfying assignment (for now just assume there is a unique solution since the analysis is similar for non-unique as well). 
+A good step is one which flips a variable in which the assignment between $a$ and $a^*$ differ. A bad step is one which flips a variable in which $a$ and $a^*$ are the same. This means that we need to perform exactly $2u$ good steps and $u$ bad steps. The probability this occurs is
+\[
+	\binom{3u}{2u} \left(\frac{1}{3}\right)^{2u} \left( \frac{2}{3}\right)^{u}
+\]
+We then apply Stirling's formula:
+\[
+	\binom{3u}{2u} = \binom{3u}{u} \geq \frac{1}{\sqrt{5u}} \frac{3^{3u}}{2^{2u}}
+\]
+to obtain a nicer lower bound. We can hence put this together in order to calculate $p$, the expected probability of finding a satsifying assignments:
+
+\begin{align}
+	p 	&= \sum_{u = 0}^{n} 2^{-n} \binom{n}{u} \binom{3u}{2u} \left( \frac{1}{3} \right)^{2u} \left( \frac{2}{3} \right)^u \\
+	 	&\geq \frac{1}{\sqrt{5n}} 2^{-n}\sum_{u = 0}^{n} \binom{n}{u} \frac{3^{3u}}{2^{2u}} \left( \frac{1}{3} \right)^{2u} \left( \frac{2}{3} \right)^u \\
+	 	&\geq \frac{1}{\sqrt{5n}} 2^{-n}\sum_{u = 0}^{n} \binom{n}{u} \frac{1}{2^u} \\
+	 	&\geq \frac{1}{\sqrt{5n}} \left(\frac{1}{2} \cdot \left(1 + \frac{1}{2} \right) \right)^n \\
+	 	& \frac{1}{\sqrt{5n}} \cdot \left( \frac{3}{4} \right)^n
+\end{align}
+
+As the running time is just a constant factor of $\frac{1}{p}$ then the running time is $O\left(\frac{4}{3} \right)^n$.
+	
+
 
 
 
