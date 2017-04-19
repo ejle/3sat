@@ -124,16 +124,18 @@
 \section{Sch\"{o}ning's Algorithm}
 
 
-The paper \cite{SchoningA99} presents a simple randomized algorithm for solving $k$-SAT
+The paper \cite{schoning99a-probabilistic} presents a simple randomized algorithm for solving $k$-SAT
 
 \begin{itemize}
 	\item Guess an initial assignment $a \in \{0,1\}^n$ uniformly at random
 	\item Repeat $3n$ times: 
 	\begin{itemize}
 		\item If the formula is satisfied by $a$ - stop and accept $a$.
-		\item Let $C$ be some clause not being satisfied by $a$: Pick one of the $\leq k$ literals in the clause at random and flip its value in the current assignment.
+		\item Let $C$ be some clause not being satisfied by $a$. Pick one of the $\leq k$ literals in the clause at random and flip its value in the current assignment.
 	\end{itemize}
 \end{itemize}
+
+\subsection{Analysis for $k = 3$}
 
 We now wish to estimate the running time of this randomized algorithm, and upper bound it as $p$. The rationale behind this is that the expected number of repetitions before a satisfying assignment is $\frac{1}{p}$, and the probability that after $t$ repeitions, the probability of not getting a satisfying assignment is at most $(1-p)^t \leq e^{pt}$.
 
@@ -161,13 +163,12 @@ to obtain a nicer lower bound. We can hence put this together in order to calcul
 
 As the running time is just a constant factor of $\frac{1}{p}$ then the running time is $O\left(\frac{4}{3} \right)^n$.
 	
-
-
-
+\subsection{Analysis for general $k$}
 
 \section{PPSZ Algorithm}
 
-In paper \cite{PaturiA98}, the authors present an algorithm based around \textit{critical variables}. 
+In paper \cite{paturi98an-improved}, the authors present an algorithm based around \textit{critical variables}.
+
 
 \bibliographystyle{plain}
 \bibliography{survey}
